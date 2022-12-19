@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <title>Войти</title>
+    <div th:insert="blocks/webjars :: webjars"></div>
+    <script type="text/javascript" th:src="@{/js/showHidePassword.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div class="content">
+        <header th:replace="blocks/header :: header"></header>
+        <div class="container d-flex flex-column align-items-center page">
+            <div>
+                <div class="themes my-2 mt-5 text-center">Вход в MedRoyal</div>
+                <div class="mb-4 headVerticalLine">
+                </div>
+            </div>
+            <div class="loginBlock d-flex flex-column align-items-center mb-2 p-3">
+                <!--Alerts block-->
+                <div th:if="${param.error}">
+                    <div class="mb-0 alert alert-danger alert-dismissible fade show buttonFont" role="alert">
+                        Неверное значение логина или пароля!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="mb-0 alert alert-success alert-dismissible fade show buttonFont" role="alert">
+                        Вы успешно вышли из аккаунта!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                <form method="POST" th:action="@{/login}">
+                    <!--Ряд email-->
+                    <label class="small mt-4 mb-1 buttonFont" style="font-size: 20px;" for="inputEmail">Введите Email</label>
+                    <input class="form-control mt-2 loginInput" id="inputEmail" type="text" th:name="username" th:value="${email}">
+                    <!--Ряд пароля-->
+                    <label class="small mb-1 mt-4 buttonFont" style="font-size: 20px;" for="inputPassword">Введите пароль</label>
+                    <div class="input-group mt-2 mb-3" style="width: 435px;">
+                        <input class="form-control loginInput border-end-0 inputPasswordClass" type="password" th:name="password"
+                               id="inputPassword" value="" aria-describedby="basic-addon1">
+                        <div class="input-group-addon">
+                          <span class="input-group-text loginInputAddon rounded-start-0 textarea-addon" id="basic-addon1">
+                              <i class="bi bi-eye-slash togglePasswordClass"></i>
+                          </span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn mt-4 btn-primary button" style="width: 240px; height: 48px;" type="submit">Войти</button>
+                    </div>
+                    <br><br>
+                </form>
+                <p class="buttonFont">Нет аккаунта?
+                    <a href="/patients/new">Зарегистрируйтесь</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <footer th:insert="blocks/footer :: footer"></footer>
+</div>
+</body>
+</html>
+
+
+
+
